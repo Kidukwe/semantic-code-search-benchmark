@@ -1,0 +1,20 @@
+# Среда и конфиги
+.env
+.venv/
+venv/
+env/
+
+# Кэш Python и Jupyter
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Системные файлы macOS
+.DS_Store
+
+# Настройки IDE (если используешь VS Code или PyCharm)
+.vscode/
+.idea/
+
+# Скачанные веса моделей (если решишь хранить их локально)
+.cache/
