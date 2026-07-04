@@ -44,6 +44,7 @@ semantic-code-search-benchmark/
 ├── .env                          # Переменные окружения
 ├── .gitignore                    # Исключения Git
 └── requirements.txt              # Зависимости проекта
+```
 
 #💻 Установка и запуск (Локально)
 
@@ -52,6 +53,7 @@ semantic-code-search-benchmark/
 ```bash 
 git clone [https://github.com/Kidukwe/semantic-code-search-benchmark.git](https://github.com/Kidukwe/semantic-code-search-benchmark.git)
 cd semantic-code-search-benchmark
+```
 
 **2. Создайте изолированное окружение (рекомендуется Conda) и установите зависимости:**
 
@@ -59,10 +61,11 @@ cd semantic-code-search-benchmark
 conda create -n semantic-search python=3.12 -y
 conda activate semantic-search
 pip install -r requirements.txt
+```
 
 **3. Запустите Jupyter Notebook:**
 
 ```bash 
 jupyter notebook
-
+```
 **4. Откройте notebooks/01_model_comparison.ipynb и выполните ячейки.**
