@@ -51,7 +51,7 @@ semantic-code-search-benchmark/
 **1. Клонируйте репозиторий:**
 
 ```bash 
-git clone [https://github.com/Kidukwe/semantic-code-search-benchmark.git](https://github.com/Kidukwe/semantic-code-search-benchmark.git)
+git clone https://github.com/Kidukwe/semantic-code-search-benchmark.git / https://gitflic.mtuci.ru/project/000095986-edu-mtuci-ru/semantic-code-search-benchmark
 cd semantic-code-search-benchmark
 ```
 
@@ -68,4 +68,4 @@ pip install -r requirements.txt
 ```bash 
 jupyter notebook
 ```
-**4. Откройте notebooks/01_model_comparison.ipynb и выполните ячейки.**
+**4. Откройте notebooks/starter.ipynb и выполните ячейки.**
