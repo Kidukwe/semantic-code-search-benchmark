@@ -1,23 +1,46 @@
-# Semantic Code Search Benchmark 🔎
+<div align="center">
 
-Сравнительный анализ мультиязычных embedding-моделей для задачи семантического поиска фрагментов кода (Python/Java) по запросам на естественном языке. Проект разработан для оценки качества векторизации кросс-модальных данных (текст → код).
+# 🔎 Semantic Code Search Benchmark
+
+**Сравнительный анализ мультиязычных embedding-моделей для задачи семантического поиска фрагментов кода (Python/Java) по запросам на естественном языке.**
+
+[![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python&logoColor=white)]()
+[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange?logo=jupyter&logoColor=white)]()
+[![ML](https://img.shields.io/badge/AI%2FML-Sentence--Transformers-success)]()
+
+*Проект разработан для оценки качества векторизации кросс-модальных данных (текст → код).*
+
+</div>
+
+---
 
 ## 🎯 Контекст и проблематика
-Классический полнотекстовый поиск опирается на строгое лексическое совпадение. При запросе «обработка ошибок» система не найдет функцию `exception_handler`, так как нет пересечения по словам. 
 
-**Решение:** Внедрение семантического поиска (Dense Retrieval). Модели на базе архитектуры Transformer превращают текст и код в плотные векторы (эмбеддинги). Похожие по смыслу фрагменты оказываются близко в математическом пространстве, что позволяет находить релевантный код через вычисление косинусного расстояния.
+> **Проблема:** Классический полнотекстовый поиск опирается на строгое лексическое совпадение. При запросе «обработка ошибок» система не найдет функцию `exception_handler`, так как нет пересечения по словам.
+
+> **Решение:** Внедрение семантического поиска (*Dense Retrieval*). Модели на базе архитектуры Transformer превращают текст и код в плотные векторы (эмбеддинги). Похожие по смыслу фрагменты оказываются близко в математическом пространстве, что позволяет находить релевантный код через вычисление косинусного расстояния.
+
+---
 
 ## 🚀 Ключевые особенности
+
 * **Оффлайн-оценка (Precision@3):** Автоматический подсчет метрики релевантности Топ-3 выдачи.
 * **Сравнение архитектур:** Тестирование классических симметричных моделей (`MiniLM`, `MPNet`) против архитектуры `Multilingual-E5`, предобученной для асимметричного поиска.
 * **Матричные вычисления:** Использование `numpy` для оптимизации вычисления косинусного сходства и сортировки результатов (`np.argpartition`).
 * **Визуализация (t-SNE):** Проекция 384-мерного векторного пространства на 2D-плоскость для анализа качества кластеризации предметных областей (БД, Авторизация, HTTP и т.д.).
 
+---
+
 ## 🛠 Технический стек
-* **Язык:** Python 3.12
-* **ML & NLP:** `sentence-transformers`, `scikit-learn`
-* **Математика и данные:** `numpy`, `pandas`
-* **Визуализация:** `matplotlib`
+
+| Компонент | Технологии |
+| :--- | :--- |
+| **Язык** | Python 3.12 |
+| **ML & NLP** | `sentence-transformers`, `scikit-learn` |
+| **Математика и данные** | `numpy`, `pandas` |
+| **Визуализация** | `matplotlib` |
+
+---
 
 ## 📊 Результаты бенчмарка
 
@@ -25,11 +48,21 @@
 
 | Модель | Precision@3 | Архитектура |
 | :--- | :--- | :--- |
-| **intfloat/multilingual-e5-small** | **0.96** | Asymmetric (text-to-code) |
-| paraphrase-multilingual-mpnet-base-v2 | 0.88 | Symmetric baseline |
-| paraphrase-multilingual-MiniLM-L12-v2 | 0.76 | Lightweight baseline |
+| 🏆 **intfloat/multilingual-e5-small** | **0.96** | Asymmetric (text-to-code) |
+| 🥈 paraphrase-multilingual-mpnet-base-v2 | 0.88 | Symmetric baseline |
+| 🥉 paraphrase-multilingual-MiniLM-L12-v2 | 0.76 | Lightweight baseline |
 
 **Вывод:** Использование префиксов контекста (`query:` и `passage:`) и обучение на задачах асимметричного поиска делает архитектуру E5 абсолютным лидером для сопоставления человеческого текста и машинного кода.
+
+---
+
+## 📦 Спецификация датасета
+В качестве экспериментального подмножества данных использовался единый фиксированный датасет чемпионата ГК «Ростелеком»:
+* **Корпус кодовой базы:** 200 функций (100 на Python + 100 на Java), распределенных по 5 функциональным категориям.
+* **Тестовая матрица:** 25 фиксированных валидационных запросов (15 на русском языке, 10 на английском) с размеченными эталонными ответами (`correct_chunk_id`).
+* **Целевые метрики оценки:** Доля попадания релевантного ответа в область видимости Топ-3 (Precision@3).
+
+---
 
 ## 📂 Структура проекта
 
@@ -40,7 +73,7 @@ semantic-code-search-benchmark/
 │   ├── code_corpus.json          # Корпус для индексации (200 функций)
 │   └── eval_questions.json       # Тестовая выборка (25 вопросов)
 ├── notebooks/
-│   └── 01_model_comparison.ipynb # Основной пайплайн исследования
+│   └── starter.ipynb             # Основной пайплайн исследования
 ├── .env                          # Переменные окружения
 ├── .gitignore                    # Исключения Git
 └── requirements.txt              # Зависимости проекта
@@ -51,7 +84,12 @@ semantic-code-search-benchmark/
 **1. Клонируйте репозиторий:**
 
 ```bash 
-git clone https://github.com/Kidukwe/semantic-code-search-benchmark.git / https://gitflic.mtuci.ru/project/000095986-edu-mtuci-ru/semantic-code-search-benchmark
+# С GitHub:
+git clone https://github.com/Kidukwe/semantic-code-search-benchmark.git
+
+# ИЛИ с GitFlick:
+git clone https://gitflic.mtuci.ru/project/000095986-edu-mtuci-ru/semantic-code-search-benchmark.git
+
 cd semantic-code-search-benchmark
 ```
 
@@ -68,4 +106,5 @@ pip install -r requirements.txt
 ```bash 
 jupyter notebook
 ```
+
 **4. Откройте notebooks/starter.ipynb и выполните ячейки.**
